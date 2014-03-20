@@ -14,7 +14,7 @@
                 // crazy is going on. Removing this will cause the library 
                 // list to act wonky
                 if (args.viewInfo.viewName === 'home') {
-                    $('#home-nav-list').find('.dx-list-item').hide();
+                    //$('#home-nav-list').find('.dx-list-item').hide();
                 }
             }
         };

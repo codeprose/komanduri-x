@@ -1,6 +1,42 @@
 ﻿<div data-options="dxView: { name: 'home', title: 'Home' }">
-    <div id="home-nav-list" data-bind="dxList: { dataSource: MyApp.db.demoCategories, grouped: true, groupTemplate: 'group' }">
-        <div data-options="dxTemplate: { name: 'group' }">
+    <div id="home-nav-list" data-bind="dxPivot: { dataSource: MyApp.db.pivotData }">
+        <div data-options="dxTemplate: { name: 'item' }">
+            <h1>
+                Videos</h1>
+            <div data-bind="dxGallery: { showIndicator: 'false', width: '100%', dataSource: item.videos }">
+                <div data-options="dxTemplate: { name: 'item' }">
+                    <div class="card">
+                        <div class="card-body">
+                            <video controls>
+                                <source type="video/mp4" data-bind="attr: { src: $data.sources.mp4 }">
+                                <source type="video/ogg" data-bind="attr: { src: $data.sources.ogg }">
+                                <source type="video/webm" data-bind="attr: { src: $data.sources.webm }">
+                                <p>Video is not supported by this device. View the original content <a data-bind="attr: { href: $data.fallback }">here</a>.</p>
+                            </video>
+                        </div>
+                        <div class="card-footer">
+                            <input type="button" value="Add to Library" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h1>
+                Photos</h1>
+            <div data-bind="dxGallery: { showIndicator: 'false', dataSource: item.photos, width: '100%' }">
+                <div data-options="dxTemplate: { name: 'item' }">
+                    <div class="card">
+                        <div class="card-body">
+                            <!--<div class="super-impose add-to-library-button" data-bind="dxButton: { icon: 'favorites', text: 'Add to Favorites', clickAction: function(clickEvent) { $parent.addImage($('#photo-gallery').dxGallery('instance').option('selectedIndex'), clickEvent); } }"></div>-->
+                            <img data-bind="attr: { src: String($data)  }" />
+                        </div>
+                        <div class="card-footer">
+                            <input type="button" value="Add to Library" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--<div data-options="dxTemplate: { name: 'group' }">
             <div class="group-button collapse" data-bind="dxAction: function (evt) { $parent.onGroupItemClicked(evt); }">
                 <div class="group-caption" data-bind="text: key"></div>
             </div>
